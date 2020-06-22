@@ -1,0 +1,25 @@
+{
+  "name": "Hammoq",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["tabs", "storage"],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://poshmark.com/create-listing/*",
+        "*://*.hammoq.com/*",
+        "http://localhost/*",
+        "https://bulksell.ebay.com/*",
+        "https://bulkedit.ebay.com/*",
+        "https://*.ebay.com/ws/eBayISAPI.dll*",
+        "https://www.facebook.com/marketplace/*"
+      ],
+      "js": ["./js/loader.js", "myscript.js"]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-ELkDE2InNI702G86lymxXYBdrcJq5bMn8+PhTgN6cks='; object-src 'self'",
+  "web_accessible_resources": ["css/*", "html/*", "js/*", "img/*", "fonts/*"]
+}
