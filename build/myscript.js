@@ -1,6 +1,9 @@
 let data;
 
-if (document.domain !== "poshmark.com" && document.domain !== "facebook.com") {
+if (
+  document.domain !== "poshmark.com" &&
+  document.domain !== "bulksell.ebay.com"
+) {
   setTimeout(() => {
     let images = document.getElementsByTagName("img");
     let paths = [];
@@ -178,7 +181,7 @@ if (document.domain == "poshmark.com") {
 if (document.domain == "bulksell.ebay.com") {
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
-      fetch("http://localhost:8000/images", {
+      fetch("https://app.hammoq.com/images", {
         method: "POST",
         body: JSON.stringify(
           value.data.paths.length > 10
@@ -223,9 +226,16 @@ if (document.domain == "bulksell.ebay.com") {
           }
         });
       setTimeout(async () => {
-        $('[placeholder="Enter UPC, ISBN, ePID, part number, or product name"]')
-          .val(value.data.upc)
+        (await waitForNode(".find-product"))
+          .val(value.data.title)
           .dispatch("input");
+        (
+          await waitForNode(
+            "#w0-find-product-search-bar-search-button:not(:disabled)"
+          )
+        ).click();
+        let button = await waitForNode(".continue-without-product .btn");
+        button.dispatch("click");
       }, 2000);
     });
   }, 1500);
