@@ -15,7 +15,8 @@
         "https://bulksell.ebay.com/*",
         "https://bulkedit.ebay.com/*",
         "https://*.ebay.com/ws/eBayISAPI.dll*",
-        "https://www.facebook.com/marketplace/*"
+        "https://www.facebook.com/marketplace/*",
+        "https://www.mercari.com/sell/*"
       ],
       "js": ["./js/loader.js", "myscript.js"]
     }
