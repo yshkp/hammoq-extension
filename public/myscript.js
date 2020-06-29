@@ -1,6 +1,6 @@
 let data;
 
-if (document.domain == "app.hammoq.com") {
+if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
   setTimeout(() => {
     let images = document.getElementsByTagName("img");
     let paths = [];
@@ -48,6 +48,8 @@ if (document.domain == "app.hammoq.com") {
       shippingFees: document.getElementById("shippingFees").value,
       profit: document.getElementById("profit").value,
       paths: paths,
+      clientid: localStorage.getItem("client_id"),
+      productid: window.location.href.substring(window.location.href.lastIndexOf('/')+1)
     };
     chrome.storage.sync.set({ data: data }, () => {
       chrome.storage.sync.get("data", (value) => {
@@ -60,7 +62,7 @@ if (document.domain == "app.hammoq.com") {
 if (document.domain == "www.mercari.com") {
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
-      fetch("https://app.hammoq.com/images", {
+      fetch("http://localhost:8000/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
@@ -162,6 +164,22 @@ if (document.domain == "www.mercari.com") {
           .dispatch("input")
           .dispatch("blur");
       }, 2000);
+
+      setTimeout(async () => {
+       // await waitForNode(".Button__PrimaryButton-xht50r-0 Button__SecondaryButton-xht50r-1 bWXZIN")
+       //    .dispatch("click")
+       document.getElementsByTagName('button')[7].click();
+       setTimeout(async () => {
+          fetch(`http://localhost:8000/api/client/product/url/${value.data.clientid}/${value.data.productid}`, {
+            method: "PUT",
+            body: {url: window.location.href, name: "mercari"},
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        },10000);
+          
+      },20000);
     });
   }, 1500);
 }
@@ -169,7 +187,7 @@ if (document.domain == "www.mercari.com") {
 if (document.domain == "poshmark.com") {
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
-      fetch("https://app.hammoq.com/images", {
+      fetch("http://localhost:8000/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
@@ -280,6 +298,22 @@ if (document.domain == "poshmark.com") {
           condButtons.eq(0).dispatch("click");
         else condButtons.eq(1).dispatch("click");
       }, 2000);
+
+      setTimeout(async () => {
+        $('[data-et-name="next"]').dispatch("click");
+      },20000);
+
+      
+      setTimeout(async () => {
+        $('[data-et-name="list_item"]').dispatch("click");
+        setTimeout(async () => {
+
+        },3000);
+      },25000);
+
+
+        
     });
   }, 1500);
 }
+
