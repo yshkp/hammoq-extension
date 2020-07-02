@@ -1,0 +1,25 @@
+
+if (document.domain == "www.facebook.com" || document.domain == "facebook.com") {
+  console.log("fr url")
+	setTimeout(async () => {
+
+		await document.getElementsByClassName("_3qn7 _61-0 _2fyi _3qnf")[1].click()//latest(0) div click to open item page
+		await setTimeout(() => {
+			const fburl = window.location.href
+			console.log(fburl)
+		},2000)
+		    
+    await chrome.storage.sync.get("data", async (value) => {
+    const token = value.data.token
+      fetch(`http://localhost:8000/api/client/product/url/${value.data.productid}`, {
+        method: "PUT",
+        body: JSON.stringify({url: window.location.href, name:"facebook"}),
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": token,
+        },
+      })
+    })
+        
+	},2000)	
+}
