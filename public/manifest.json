@@ -7,10 +7,13 @@
   },
   "permissions": ["tabs", "storage"],
   "content_scripts": [
-    {
+    { 
+      "all_frames": true,
       "matches": [
         "https://poshmark.com/create-listing/*",
+        "https://poshmark.com/create-listing*",
         "*://*.hammoq.com/*",
+        //"http://localhost/*",
         "http://localhost:3000/edit/*",
         "https://bulksell.ebay.com/*",
         "https://bulkedit.ebay.com/*",
@@ -19,7 +22,8 @@
         "https://www.mercari.com/sell/*",
         "https://www.etsy.com/in-en/your/shops/*/onboarding/listings/*"
       ],
-      "js": ["./js/loader.js", "/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js"]
+      "run_at": "document_start",
+      "js": ["./js/loader.js", "myscript.js"]//,"/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js"
     },
     {
       "matches": [

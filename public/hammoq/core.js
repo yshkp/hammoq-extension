@@ -1,14 +1,14 @@
 let data;
 
 if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
-  var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({platform: "hammoq"});
-  port.onMessage.addListener(function(msg) {
-    if (msg.q1 == "action"){
-      console.log(msg);
-      port.postMessage({answer1: "list"});
-    }
-  });
+  // var port = chrome.runtime.connect({name: "app"});
+  // port.postMessage({platform: "hammoq"});
+  // port.onMessage.addListener(function(msg) {
+  //   if (msg.q1 == "action"){
+  //     console.log(msg);
+  //     port.postMessage({answer1: "list"});
+  //   }
+  // });
 
 
   setTimeout(() => {
@@ -17,22 +17,6 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
     for (let i = 1; i < images.length; i++) {
       paths.push(images[i].currentSrc.split("assets/")[1]);
     }
-
-    // chrome.runtime.onConnect.addListener(function(port) {
-    //   console.assert(port.name == "knockknock");
-    //   port.onMessage.addListener(function(msg) {
-    //     if (msg.joke == "Knock knock"){
-    //       console.log(msg);
-    //       port.postMessage({question: "Who's there?"});
-    //     }
-    //     else if (msg.answer == "Madame"){
-    //       port.postMessage({question: "Madame who?"});
-    //     }
-    //     else if (msg.answer == "Madame... Bovary"){
-    //       port.postMessage({question: "I don't get it."});
-    //     }
-    //   });
-    // });
 
     data = {
       mrp: document.getElementById("mrp").value,
