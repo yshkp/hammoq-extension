@@ -11,16 +11,58 @@
       "matches": [
         "https://poshmark.com/create-listing/*",
         "*://*.hammoq.com/*",
-        "http://localhost/*",
+        //"http://localhost/*",
+        "http://localhost:3000/edit/*",
         "https://bulksell.ebay.com/*",
         "https://bulkedit.ebay.com/*",
         "https://*.ebay.com/ws/eBayISAPI.dll*",
-        "https://www.facebook.com/marketplace/*",
-        "https://www.mercari.com/sell/*"
+        "https://www.facebook.com/marketplace/",
+        "https://www.mercari.com/sell/*",
+        "https://www.etsy.com/in-en/your/shops/*/onboarding/listings/*"
       ],
-      "js": ["./js/loader.js", "myscript.js"]
+      "js": ["./js/loader.js", "/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js"]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/marketplace/selling/?ref=composer"
+      ],
+      "js": ["/fb/fburl.js"]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/marketplace/item/*"
+      ],
+      "js": ["./js/loader.js", "/fb/delist.js"]
+    },
+    {
+      "matches": [
+        "https://poshmark.com/feed?created_listing_id=*"
+      ],
+      "js": ["/poshmark/feed.js"]
+    },
+    {
+      "matches": [
+        "https://poshmark.com/closet/*"
+      ],
+      "js": ["/poshmark/closet.js"]
+    },
+    {
+      "matches": [
+        "https://poshmark.com/listing/*"
+      ],
+      "js": ["/poshmark/edit.js"]
+    },
+    {
+      "matches": [
+        "https://poshmark.com/edit-listing/*"
+      ],
+      "js": ["/poshmark/delete.js"]
     }
   ],
+  "background": {
+    "scripts": ["./bg/background.js"]
+  },
+  "permissions": [ "tabs", "storage" ],
   "content_security_policy": "script-src 'self' 'sha256-ELkDE2InNI702G86lymxXYBdrcJq5bMn8+PhTgN6cks='; object-src 'self'",
   "web_accessible_resources": ["css/*", "html/*", "js/*", "img/*", "fonts/*"]
 }
