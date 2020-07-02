@@ -23,7 +23,7 @@
         "https://www.etsy.com/in-en/your/shops/*/onboarding/listings/*"
       ],
       "run_at": "document_start",
-      "js": ["./js/loader.js", "myscript.js"]//,"/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js"
+      "js": ["./js/loader.js" ,"/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js", "ebay/core.js"]
     },
     {
       "matches": [
