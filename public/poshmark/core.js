@@ -1,19 +1,7 @@
 
 if (document.domain == "poshmark.com") {
   setTimeout(() => {
-    // var port = chrome.runtime.connect({name: "knockknock"});
-    // port.postMessage({joke: "Knock knock"});
-    // port.onMessage.addListener(function(msg) {
-    //   if (msg.question == "Who's there?"){
-    //     console.log(msg.question);
-    //     port.postMessage({answer: "Madame"});
-    //   }
-    //   else if (msg.question == "Madame who?")
-    //     port.postMessage({answer: "Madame... Bovary"});
-    // });
-
-
-
+    
     chrome.storage.sync.get("data", async (value) => {
       fetch("https://app.hammoq.com/images", {
         method: "POST",

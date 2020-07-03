@@ -63,7 +63,6 @@ window.setState = function (name, value) {
   STATES[name] = { time: new Date(), value: value };
 };
 
-
 jQuery.fn.dispatch = function (event, obj) {
   try {
     if (this[0] === undefined)

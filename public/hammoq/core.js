@@ -1,14 +1,16 @@
 let data;
 
 if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
-  // var port = chrome.runtime.connect({name: "app"});
-  // port.postMessage({platform: "hammoq"});
-  // port.onMessage.addListener(function(msg) {
-  //   if (msg.q1 == "action"){
-  //     console.log(msg);
-  //     port.postMessage({answer1: "list"});
-  //   }
-  // });
+  var port = chrome.runtime.connect({name: "app"});
+  port.postMessage({platform: "hammoq"});
+  port.onMessage.addListener(function(msg) {
+
+    if (msg.q1 == "action"){
+      console.log(msg);
+      port.postMessage({answer1: "list"});
+    }
+    
+  });
 
 
   setTimeout(() => {
