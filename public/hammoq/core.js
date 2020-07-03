@@ -66,7 +66,12 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
     chrome.storage.sync.set({ data: data }, () => {
       chrome.storage.sync.get("data", (value) => {
         console.log(value.data);
+         // do{
+         //  setTimeout(()=>{
+         //   window.location.reload()
+         //  },4000)
+         // }while(value.data.title == "");
       });
     });
-  }, 1000);
+  }, 5000);
 }

@@ -13,7 +13,6 @@
         "https://poshmark.com/create-listing*",
         "*://*.hammoq.com/*",
         "http://localhost:3000/edit/*",
-        "https://www.facebook.com/marketplace/",
         "https://www.mercari.com/sell/*",
         "https://www.etsy.com/in-en/your/shops/*/onboarding/listings/*"
       ],
@@ -23,7 +22,6 @@
         "/hammoq/core.js",
         "/poshmark/core.js",
         "/mercari/core.js",
-        "/fb/core.js",
         "etsy/core.js"
       ]
     },

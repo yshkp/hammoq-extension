@@ -7,13 +7,13 @@ chrome.runtime.onConnect.addListener(function(port) {
       port.postMessage({q1: "action"});
     }
     else if (msg.answer1 == "list"){
-      await console.log(msg)
-      await localStorage.setItem("action", msg.answer1);
+       console.log(msg)
+       localStorage.setItem("action", msg.answer1);
       //await window.open("https://www.facebook.com/marketplace/")
-    }else if(msg.fbintro == "hellofb"){
-      await console.log(localStorage.getItem("action"))
-      await port.postMessage({actionfb: localStorage.getItem("action")});
-    }else if (msg.fbanswer1 == "listingfb"){
+    }else if(msg.poshmarkintro == "helloposhmark"){
+       console.log(localStorage.getItem("action"))
+       port.postMessage({actionposhmark: localStorage.getItem("action")});
+    }else if (msg.poshmarkanswer1 == "listingposhmark"){
       console.log(msg)
       localStorage.removeItem("action");
     }

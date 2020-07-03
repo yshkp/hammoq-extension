@@ -1,9 +1,22 @@
+var port = chrome.runtime.connect({name: "app"});
+  port.postMessage({poshmarkintro: "helloposhmark"});
+  port.onMessage.addListener(function(msg) {
 
-if (document.domain == "poshmark.com") {
+    if (msg.actionposhmark == "list"){
+       console.log(msg);
+       setdata();
+       
+    }
+
+  });
+
+  window.beforeunload(port.postMessage({poshmarkanswer1: "listingposhmark"}));
+
+//if (document.domain == "poshmark.com") {
+  function setdata(){
   setTimeout(() => {
-    
     chrome.storage.sync.get("data", async (value) => {
-      fetch("https://app.hammoq.com/images", {
+      fetch("http://localhost:8000/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
@@ -129,6 +142,8 @@ if (document.domain == "poshmark.com") {
       
         
     });
+    
   }, 1500);
-
 }
+//}
+
