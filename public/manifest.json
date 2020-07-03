@@ -63,9 +63,9 @@
     }
   ],
   "background": {
-    "scripts": ["./bg/background.js"]
+    "scripts": ["./background/background.js"]
   },
   "permissions": [ "tabs", "storage" ],
   "content_security_policy": "script-src 'self' 'sha256-ELkDE2InNI702G86lymxXYBdrcJq5bMn8+PhTgN6cks='; object-src 'self'",
-  "web_accessible_resources": ["css/*", "html/*", "js/*", "img/*", "fonts/*"]
+  "web_accessible_resources": ["css/*", "html/*", "handlers/*", "img/*", "fonts/*"]
 }
