@@ -69,7 +69,6 @@ jQuery.fn.dispatch = function (event, obj) {
       throw new Error("cant dispatch, object is empty");
     if (this.length > 1) throw new Error("More that one selected node");
   } catch (error) {
-    er(error);
     return this;
   }
   if (obj === undefined) obj = {};

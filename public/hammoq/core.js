@@ -1,17 +1,14 @@
 let data;
 
 if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
-  var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({platform: "hammoq"});
-  port.onMessage.addListener(function(msg) {
-
-    if (msg.q1 == "action"){
+  var port = chrome.runtime.connect({ name: "app" });
+  port.postMessage({ platform: "hammoq" });
+  port.onMessage.addListener(function (msg) {
+    if (msg.q1 == "action") {
       console.log(msg);
-      port.postMessage({answer1: "list"});
+      port.postMessage({ answer1: "list" });
     }
-    
   });
-
 
   setTimeout(() => {
     let images = document.getElementsByTagName("img");
@@ -61,8 +58,10 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
       shippingFees: document.getElementById("shippingFees").value,
       profit: document.getElementById("profit").value,
       paths: paths,
-      productid: window.location.href.substring(window.location.href.lastIndexOf('/')+1),
-      token: localStorage.getItem("token")
+      productid: window.location.href.substring(
+        window.location.href.lastIndexOf("/") + 1
+      ),
+      token: localStorage.getItem("token"),
     };
     chrome.storage.sync.set({ data: data }, () => {
       chrome.storage.sync.get("data", (value) => {
