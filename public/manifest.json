@@ -23,7 +23,7 @@
         "https://www.etsy.com/in-en/your/shops/*/onboarding/listings/*"
       ],
       "run_at": "document_start",
-      "js": ["./js/loader.js" ,"/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js", "ebay/core.js"]
+      "js": ["./handlers/loader.js" ,"/hammoq/core.js", "/poshmark/core.js", "/mercari/core.js", "/fb/core.js", "etsy/core.js", "ebay/core.js"]
     },
     {
       "matches": [
@@ -35,7 +35,7 @@
       "matches": [
         "https://www.facebook.com/marketplace/item/*"
       ],
-      "js": ["./js/loader.js", "/fb/delist.js"]
+      "js": ["./handlers/loader.js", "/fb/delist.js"]
     },
     {
       "matches": [
