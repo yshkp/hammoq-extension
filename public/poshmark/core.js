@@ -15,7 +15,7 @@ if (document.domain == "poshmark.com") {
 
 
     chrome.storage.sync.get("data", async (value) => {
-      fetch("http://localhost:8000/images", {
+      fetch("https://app.hammoq.com/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
