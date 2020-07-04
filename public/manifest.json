@@ -47,7 +47,7 @@
 
    
     {
-      "matches": ["https://www.mercari.com/sell/*"],
+      "matches": ["https://www.mercari.com/sell/"],
       "js": ["./handlers/loader.js", "/mercari/core.js"]
     },
     {
