@@ -2,7 +2,7 @@
 if (document.domain == "www.etsy.com") {
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
-      fetch("https://app.hammoq.com/images", {
+      fetch("http://localhost:8000/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
