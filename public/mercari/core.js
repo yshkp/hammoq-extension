@@ -1,5 +1,15 @@
+var port = chrome.runtime.connect({name: "app"});
+  port.postMessage({poshmarkintro: "helloposhmark"});
+  port.onMessage.addListener(function(msg) {
 
-if (document.domain == "www.mercari.com") {
+    if (msg.actionposhmark == "list"){
+       console.log(msg);
+       setdata();
+       port.postMessage({poshmarkanswer1: "listingmercari"})
+    }
+
+  });
+function setdata() {
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
       fetch("https://app.hammoq.com/images", {
@@ -109,18 +119,6 @@ if (document.domain == "www.mercari.com") {
        // await waitForNode(".Button__PrimaryButton-xht50r-0 Button__SecondaryButton-xht50r-1 bWXZIN")
        //    .dispatch("click")
        document.getElementsByTagName('button')[7].click();
-       setTimeout(async () => {
-          const token = value.data.token
-          fetch(`http://localhost:8000/api/client/product/url/${value.data.productid}`, {
-            method: "PUT",
-            body: JSON.stringify({url:window.location.href, name:"mercari"}),
-            headers: {
-              "Content-Type": "application/json",
-              "x-access-token": token,
-            },
-          })
-        },10000);
-          
       },20000);
     });
   }, 1500);

@@ -5,18 +5,18 @@ var port = chrome.runtime.connect({name: "app"});
     if (msg.actionposhmark == "list"){
        console.log(msg);
        setdata();
-       
+       port.postMessage({poshmarkanswer1: "listingposhmark"})
     }
 
   });
 
-  window.beforeunload(port.postMessage({poshmarkanswer1: "listingposhmark"}));
+  //window.beforeunload(port.postMessage({poshmarkanswer1: "listingposhmark"}));
 
 //if (document.domain == "poshmark.com") {
   function setdata(){
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
-      fetch("http://localhost:8000/images", {
+      fetch("https://app.hammoq.com/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),
         headers: {
