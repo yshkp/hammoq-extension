@@ -1,15 +1,15 @@
 let data;
 
 if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
-  var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({platform: "hammoq"});
-  port.onMessage.addListener(function(msg) {
-    if (msg.q1 == "action"){
-      console.log(msg);
-      port.postMessage({answer1: "list"});
-    }
+  var port = chrome.runtime.connect({ name: "app" });
+  if(localStorage.getItem("action") == "list"){
+    port.postMessage({ answer1: localStorage.getItem("action") });
+  }
+  if(localStorage.getItem("action") == "delist"){
+    port.postMessage({ answer1: localStorage.getItem("action") });
+  }
+  port.onMessage.addListener(function (msg) {
   });
-
 
   setTimeout(() => {
     let images = document.getElementsByTagName("img");
@@ -17,22 +17,6 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
     for (let i = 1; i < images.length; i++) {
       paths.push(images[i].currentSrc.split("assets/")[1]);
     }
-
-    // chrome.runtime.onConnect.addListener(function(port) {
-    //   console.assert(port.name == "knockknock");
-    //   port.onMessage.addListener(function(msg) {
-    //     if (msg.joke == "Knock knock"){
-    //       console.log(msg);
-    //       port.postMessage({question: "Who's there?"});
-    //     }
-    //     else if (msg.answer == "Madame"){
-    //       port.postMessage({question: "Madame who?"});
-    //     }
-    //     else if (msg.answer == "Madame... Bovary"){
-    //       port.postMessage({question: "I don't get it."});
-    //     }
-    //   });
-    // });
 
     data = {
       mrp: document.getElementById("mrp").value,
@@ -75,13 +59,20 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
       shippingFees: document.getElementById("shippingFees").value,
       profit: document.getElementById("profit").value,
       paths: paths,
-      productid: window.location.href.substring(window.location.href.lastIndexOf('/')+1),
-      token: localStorage.getItem("token")
+      productid: window.location.href.substring(
+        window.location.href.lastIndexOf("/") + 1
+      ),
+      token: localStorage.getItem("token"),
     };
     chrome.storage.sync.set({ data: data }, () => {
       chrome.storage.sync.get("data", (value) => {
         console.log(value.data);
+         // do{
+         //  setTimeout(()=>{
+         //   window.location.reload()
+         //  },4000)
+         // }while(value.data.title == "");
       });
     });
-  }, 1000);
+  }, 5000);
 }
