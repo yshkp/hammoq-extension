@@ -23,11 +23,11 @@ chrome.runtime.onConnect.addListener(function(port) {
     //mercari
     else if(msg.poshmarkintro == "hellomercari"){
        console.log(localStorage.getItem("action"))
-       port.postMessage({actionposhmark: localStorage.getItem("action")});
-    }else if (msg.poshmarkanswer1 == "listingmercari"){
+       port.postMessage({actionmercari: localStorage.getItem("action")});
+    }else if (msg.mercarianswer1 == "listingmercari"){
       console.log(msg)
       localStorage.removeItem("action");
-    }else if (msg.poshmarkanswer1 == "delistingmercari"){
+    }else if (msg.mercarianswer1 == "delistingmercari"){
       console.log(msg)
       localStorage.removeItem("action");
     }

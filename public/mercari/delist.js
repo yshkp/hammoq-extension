@@ -1,12 +1,11 @@
 
 var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({poshmarkintro: "helloposhmark"});
+  port.postMessage({poshmarkintro: "hellomercari"});
   port.onMessage.addListener(function(msg) {
 
-    if (msg.actionposhmark == "delist"){
+    if (msg.actionmercari == "delist"){
        console.log(msg);
        delist();
-       //port.postMessage({poshmarkanswer1: "delistingmercari"})
     }
 
   });

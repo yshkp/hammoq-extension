@@ -1,8 +1,8 @@
 var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({poshmarkintro: "helloposhmark"});
+  port.postMessage({poshmarkintro: "hellomercari"});
   port.onMessage.addListener(function(msg) {
 
-    if (msg.actionposhmark == "list"){
+    if (msg.actionmercari == "list"){
        console.log(msg);
        setdata();
     }
