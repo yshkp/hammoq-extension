@@ -1,12 +1,56 @@
 let data;
 
-if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
+if (document.domain == "app.hammoq.com" || document.domain == "agent.hammoq.com" || document.domain == "localhost") {
   var port = chrome.runtime.connect({ name: "app" });
-  if(localStorage.getItem("action") == "list"){
-    port.postMessage({ answer1: localStorage.getItem("action") });
+  if(localStorage.getItem("actionposhmark") == "listposhmark"){
+    port.postMessage({ answer1: localStorage.getItem("actionposhmark") });
   }
-  if(localStorage.getItem("action") == "delist"){
-    port.postMessage({ answer1: localStorage.getItem("action") });
+  if(localStorage.getItem("actionmercari") == "listmercari"){
+    port.postMessage({ answer1: localStorage.getItem("actionmercari") });
+  }
+  if(localStorage.getItem("actionfb") == "listfb"){
+    port.postMessage({ answer1: localStorage.getItem("actionfb") });
+  }
+  if(localStorage.getItem("actionebay") == "listebay"){
+    port.postMessage({ answer1: localStorage.getItem("actionebay") });
+  }
+  if(localStorage.getItem("actionposhmark") == "delistposhmark"){
+    port.postMessage({ answer1: localStorage.getItem("actionposhmark"), poshmarkdelisturl: localStorage.getItem("poshmarkdelisturl")  });
+  }
+  if(localStorage.getItem("actionmercari") == "delistmercari"){
+    port.postMessage({ answer1: localStorage.getItem("actionmercari"), mercaridelisturl: localStorage.getItem("mercaridelisturl")  });
+  }
+  if(localStorage.getItem("actionfb") == "delistfb"){
+    port.postMessage({ answer1: localStorage.getItem("actionfb") });
+  }
+  if(localStorage.getItem("actionebay") == "delistebay"){
+    port.postMessage({ answer1: localStorage.getItem("actionebay"), ebaydelisturl: localStorage.getItem("ebaydelisturl") });
+  }
+
+  //hammoq agent
+  if(localStorage.getItem("actionposhmarkagent") == "listposhmarkagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionposhmarkagent") });
+  }
+  if(localStorage.getItem("actionmercariagent") == "listmercariagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionmercari@agentagent") });
+  }
+  if(localStorage.getItem("actionfbagent") == "listfbagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionfbagent") });
+  }
+  if(localStorage.getItem("actionebayagent") == "listebayagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionebayagent") });
+  }
+  if(localStorage.getItem("actionposhmarkagent") == "delistposhmarkagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionposhmarkagent") });
+  }
+  if(localStorage.getItem("actionmercariagent") == "delistmercariagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionmercariagent") });
+  }
+  if(localStorage.getItem("actionfbagent") == "delistfbagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionfbagent") });
+  }
+  if(localStorage.getItem("actionebayagent") == "delistebayagent"){
+    port.postMessage({ answer1agent: localStorage.getItem("actionebayagent"), ebaydelisturlagent: localStorage.getItem("ebaydelisturlagent") });
   }
   port.onMessage.addListener(function (msg) {
   });
@@ -15,7 +59,9 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
     let images = document.getElementsByTagName("img");
     let paths = [];
     for (let i = 1; i < images.length; i++) {
-      paths.push(images[i].currentSrc.split("assets/")[1]);
+      if(images[i].currentSrc.split("assets/")[1] != "undefined" && images[i].currentSrc.split("assets/")[1] != "" && images[i].currentSrc.split("assets/")[1] != null ){
+        paths.push(images[i].currentSrc.split("assets/")[1]);
+      }
     }
 
     data = {
@@ -63,6 +109,8 @@ if (document.domain == "app.hammoq.com" || document.domain == "localhost") {
         window.location.href.lastIndexOf("/") + 1
       ),
       token: localStorage.getItem("token"),
+      domain: document.domain,
+      clientid: window.location.href.substring(window.location.href.lastIndexOf('/', window.location.href.lastIndexOf('/')-1)+1,window.location.href.lastIndexOf("/"))
     };
     chrome.storage.sync.set({ data: data }, () => {
       chrome.storage.sync.get("data", (value) => {

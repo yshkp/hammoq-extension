@@ -1,9 +1,9 @@
 //url()
 var port = chrome.runtime.connect({name: "app"});
-  port.postMessage({poshmarkintro: "hellomercari"});
+  port.postMessage({mercariintro: "hellomercari"});
   port.onMessage.addListener(function(msg) {
 
-    if (msg.actionmercari == "list"){
+    if (msg.actionmercari == "listmercari"){
        console.log(msg);
        url();
        port.postMessage({mercarianswer1: "listingmercari"})
@@ -18,14 +18,26 @@ setTimeout(async () => {
   console.log(window.location.href)
   chrome.storage.sync.get("data", async (value) => {
           const token = value.data.token
-          fetch(`http://localhost:8000/api/client/product/url/${value.data.productid}`, {
+          if(token == null){
+            fetch(`https://app.hammoq.com/images/url/${value.data.productid}`, {
             method: "PUT",
-            body: JSON.stringify({url:window.location.href, name:"mercari"}),
+            body: JSON.stringify({url:window.location.href, name:"mercari", clientid:value.data.clientid, domain:value.data.domain}),
             headers: {
               "Content-Type": "application/json",
               "x-access-token": token,
             },
           })
+          }else{
+            fetch(`https://app.hammoq.com/api/client/product/url/${value.data.productid}`, {
+            method: "PUT",
+            body: JSON.stringify({url:window.location.href, name:"mercari", clientid:value.data.clientid, domain:value.data.domain}),
+            headers: {
+              "Content-Type": "application/json",
+              "x-access-token": token,
+            },
+          })
+          }
+          
   });
 },4000);
 }

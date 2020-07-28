@@ -3,7 +3,7 @@ var port = chrome.runtime.connect({name: "app"});
   port.postMessage({poshmarkintro: "helloposhmark"});
   port.onMessage.addListener(function(msg) {
 
-    if (msg.actionposhmark == "delist"){
+    if (msg.actionposhmark == "delistposhmark"){
        console.log(msg);
        deletedata();
     }

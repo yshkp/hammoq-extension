@@ -1,8 +1,15 @@
 var port = chrome.runtime.connect({name: "app"});
   port.postMessage({poshmarkintro: "helloposhmark"});
+  port.postMessage({poshmarkintroagent: "helloposhmarkagent"});
   port.onMessage.addListener(function(msg) {
 
-    if (msg.actionposhmark == "list"){
+    if (msg.actionposhmark == "listposhmark"){
+       console.log(msg);
+       setdata();
+       //port.postMessage({poshmarkanswer1: "listingposhmark"})
+    }
+
+    if (msg.actionposhmarkagent == "listposhmarkagent"){
        console.log(msg);
        setdata();
        //port.postMessage({poshmarkanswer1: "listingposhmark"})
@@ -16,6 +23,7 @@ var port = chrome.runtime.connect({name: "app"});
   function setdata(){
   setTimeout(() => {
     chrome.storage.sync.get("data", async (value) => {
+      console.log(value.data)
       fetch("https://app.hammoq.com/images", {
         method: "POST",
         body: JSON.stringify(value.data.paths),

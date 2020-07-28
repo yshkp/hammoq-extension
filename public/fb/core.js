@@ -1,20 +1,17 @@
+var port = chrome.runtime.connect({name: "app"});
+  port.postMessage({fbintro: "hellofb"});
+  port.onMessage.addListener(function(msg) {
 
-//if (document.domain == "www.facebook.com" || document.domain == "facebook.com") {
-  // var port = chrome.runtime.connect({name: "app"});
-  // port.postMessage({fbintro: "hellofb"});
-  // port.onMessage.addListener(async function(msg) {
+    if (msg.actionfb == "listfb"){
+       console.log(msg);
+       setdata();
+    }
 
-  //   if (msg.actionfb == "list"){
-  //     await console.log(msg);
-  //     await setdata()
-  //     await port.postMessage({fbanswer1: "listingfb"});
-  //   }
-
-  // });
+  });
 
   
 
-//function setdata(){
+function setdata(){
   console.log("fb title");
   setTimeout(async () => {
       await document.getElementsByClassName("_54qk _43ff _4jy0 _4jy3 _4jy1 _51sy selected _42ft")[0].click()
@@ -144,5 +141,4 @@
       }, 2000);
     });
   }, 4000);
-//}
-//}
+}

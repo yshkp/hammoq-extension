@@ -18,12 +18,37 @@
         "/hammoq/core.js"
       ]
     },
+
+    //agent
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.hammoq.com/product/*",
+        "http://localhost:3001/product/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "./handlers/loader.js",
+        "/hammoq/core.js"
+      ]
+    },
+    
     
     {
       "all_frames": true,
       "matches": ["https://*.ebay.com/*"],
       "run_at": "document_start",
       "js": ["./handlers/loader.js", "./ebay/core.js"]
+    },
+    {
+      "all_frames": true,
+      "matches": ["https://www.ebay.com/sh/lst/active"],
+      "run_at": "document_start",
+      "js": ["./handlers/loader.js", "./ebay/ebaydelist.js"]
+    },
+    {
+      "matches": ["https://offer.ebay.com/ws/*"],
+      "js": ["./handlers/loader.js", "./ebay/ebaydelist2.js"]
     },
 
     
@@ -32,12 +57,13 @@
       "js": ["./handlers/loader.js", "/etsy/core.js"]
     },
 
+
     {
       "matches": ["https://www.facebook.com/marketplace/"],
       "js": ["./handlers/loader.js", "/fb/core.js"]
     },
     {
-      "matches": ["https://www.facebook.com/marketplace/selling/?ref=composer"],
+      "matches": ["https://www.facebook.com/marketplace/selling/*"],
       "js": ["/fb/fburl.js"]
     },
     {

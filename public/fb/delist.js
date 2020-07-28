@@ -1,5 +1,16 @@
+var port = chrome.runtime.connect({name: "app"});
+  port.postMessage({fbintro: "hellofb"});
+  port.onMessage.addListener(function(msg) {
 
-if (document.domain == "www.facebook.com" || document.domain == "facebook.com") {
+    if (msg.actionfb == "delistfb"){
+       console.log(msg);
+       delistfb();
+       port.postMessage({fbanswer1: "delistingfb"})
+    }
+
+  })
+
+function delistfb() {
 	setTimeout(async() => {
 		// setTimeout(() => {
 		// 	document.getElementsByClassName("_231w _231z _4yee")[0].click()//delete listing link
@@ -7,6 +18,21 @@ if (document.domain == "www.facebook.com" || document.domain == "facebook.com") 
 		// 		document.getElementsByClassName("_43rm")[1].click()//delete button
 		// 	},2000)
 		// },2000)	
+		setTimeout(async () => {
+	      chrome.storage.sync.get("data", async (value) => {
+	        
+	        const token = value.data.token
+	          fetch(`http://localhost:8000/api/client/product/url/${value.data.productid}`, {
+	            method: "PUT",
+	            body: JSON.stringify({url:"", name:"facebook", type:"delist"}),
+	            headers: {
+	              "Content-Type": "application/json",
+	              "x-access-token": token,
+	            },
+	          })
+	      })
+	      console.log("delisted from db done")
+	    },1000);
 		(await waitForNode('[nextavailability="out_of_stock"]')).dispatch('click');
 		(await waitForNode('input[value="DECLINE"]')).prop('checked', true).dispatch('click');
 		let button = $('div[data-hover="tooltip"]:contains("Next")');
